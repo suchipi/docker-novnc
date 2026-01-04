@@ -2,11 +2,19 @@
 
 This Docker container starts an X server with fluxbox, makes it accessible via noVNC, and then runs the command provided to it.
 
-The container is based on `ubuntu:20.04`.
+The container is based on `ubuntu:24.04`.
 
 ## Usage (CLI)
 
+First build it:
+
+```sh
+docker build . -t suchipi/novnc
 ```
+
+Then run it:
+
+```sh
 docker run --rm -it -p 8080:8080 suchipi/novnc
 ```
 
@@ -14,7 +22,7 @@ Then, open <http://localhost:8080/>.
 
 To run a program, append it to the end of the command:
 
-```
+```sh
 docker run --rm -it -p 8080:8080 suchipi/novnc xterm
 ```
 
@@ -22,7 +30,9 @@ When run this way, the container will exit once the program you specified exits.
 
 ## Usage (As Dockerfile `FROM` base)
 
-You can also use this container as a base image in a Dockerfile. Set up your Dockerfile as normal, then use `CMD` to specify what to run in the container (if anything). The following example installs wine, downloads the [BGB Game Boy emulator](https://bgb.bircd.org/), and sets it as the startup command for the container:
+You can also use this container as a base image in a Dockerfile. Set up your Dockerfile as normal, then use `CMD` to specify what to run in the container (if anything).
+
+The following example installs wine, downloads the [BGB Game Boy emulator](https://bgb.bircd.org/), and sets it as the startup command for the container:
 
 ```Dockerfile
 FROM suchipi/novnc
